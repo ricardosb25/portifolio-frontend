@@ -7,6 +7,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 body {
@@ -14,6 +17,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: var(--transition);
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 a {
