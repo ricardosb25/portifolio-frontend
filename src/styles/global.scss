@@ -1,7 +1,7 @@
-@import './variables';
-@import './mixins';
-@import './themes/light';
-@import './themes/dark';
+@use './variables' as *;
+@use './mixins' as *;
+@use './themes/light';
+@use './themes/dark';
 
 html, body {
   scroll-behavior: smooth !important;

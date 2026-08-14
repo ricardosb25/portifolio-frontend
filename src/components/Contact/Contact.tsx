@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Contact.scss';
-import { Mail, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, Send, CheckCircle2, AlertCircle, Loader2, Copy, Check } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../SocialIcons/SocialIcons';
 
 export default function Contact() {
@@ -11,7 +11,9 @@ export default function Contact() {
     messageText: ''
   });
 
-  const [submissionStatus, setSubmissionStatus] = useState<string | null>(null);
+  const [submissionStatus, setSubmissionStatus] = useState<'success' | 'error' | null>(null);
+  const [isSubmittingForm, setIsSubmittingForm] = useState(false);
+  const [isEmailCopied, setIsEmailCopied] = useState(false);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -21,19 +23,56 @@ export default function Contact() {
     }));
   };
 
-  const handleFormSubmit = (event: React.FormEvent) => {
+  const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setSubmissionStatus('success');
-    setFormData({
-      senderName: '',
-      senderEmail: '',
-      subjectText: '',
-      messageText: ''
-    });
+    setIsSubmittingForm(true);
+    setSubmissionStatus(null);
 
+    const formspreeFormId = import.meta.env.VITE_FORMSPREE_FORM_ID || 'YOUR_FORMSPREE_FORM_ID';
+    const formSubmissionUrl = `https://formspree.io/f/${formspreeFormId}`;
+
+    try {
+      const response = await fetch(formSubmissionUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.senderName,
+          email: formData.senderEmail,
+          subject: formData.subjectText,
+          message: formData.messageText
+        })
+      });
+
+      if (response.ok) {
+        setSubmissionStatus('success');
+        setFormData({
+          senderName: '',
+          senderEmail: '',
+          subjectText: '',
+          messageText: ''
+        });
+      } else {
+        setSubmissionStatus('error');
+      }
+    } catch {
+      setSubmissionStatus('error');
+    } finally {
+      setIsSubmittingForm(false);
+      setTimeout(() => {
+        setSubmissionStatus(null);
+      }, 6000);
+    }
+  };
+
+  const copyEmailToClipboard = () => {
+    navigator.clipboard.writeText('ricardosbissaco@gmail.com');
+    setIsEmailCopied(true);
     setTimeout(() => {
-      setSubmissionStatus(null);
-    }, 5000);
+      setIsEmailCopied(false);
+    }, 3000);
   };
 
   const contactMethods = [
@@ -89,6 +128,13 @@ export default function Contact() {
                 </a>
               ))}
             </div>
+
+            <div className="copy-email-box">
+              <button className="copy-email-button" onClick={copyEmailToClipboard}>
+                {isEmailCopied ? <Check size={18} /> : <Copy size={18} />}
+                <span>{isEmailCopied ? 'Email copiado!' : 'Copiar email'}</span>
+              </button>
+            </div>
           </div>
 
           <form className="contact-form" onSubmit={handleFormSubmit}>
@@ -96,6 +142,13 @@ export default function Contact() {
               <div className="form-feedback success">
                 <CheckCircle2 size={20} />
                 <span>Mensagem enviada com sucesso! Em breve entrarei em contato.</span>
+              </div>
+            )}
+
+            {submissionStatus === 'error' && (
+              <div className="form-feedback error">
+                <AlertCircle size={20} />
+                <span>Ocorreu um erro ao enviar a mensagem. Tente novamente mais tarde.</span>
               </div>
             )}
 
@@ -109,6 +162,7 @@ export default function Contact() {
                 value={formData.senderName}
                 onChange={handleInputChange}
                 placeholder="Seu nome"
+                disabled={isSubmittingForm}
               />
             </div>
 
@@ -122,6 +176,7 @@ export default function Contact() {
                 value={formData.senderEmail}
                 onChange={handleInputChange}
                 placeholder="seu.email@exemplo.com"
+                disabled={isSubmittingForm}
               />
             </div>
 
@@ -135,6 +190,7 @@ export default function Contact() {
                 value={formData.subjectText}
                 onChange={handleInputChange}
                 placeholder="Assunto da mensagem"
+                disabled={isSubmittingForm}
               />
             </div>
 
@@ -148,12 +204,22 @@ export default function Contact() {
                 value={formData.messageText}
                 onChange={handleInputChange}
                 placeholder="Escreva sua mensagem aqui..."
+                disabled={isSubmittingForm}
               />
             </div>
 
-            <button type="submit" className="submit-button">
-              <Send size={18} />
-              <span>Enviar Mensagem</span>
+            <button type="submit" className="submit-button" disabled={isSubmittingForm}>
+              {isSubmittingForm ? (
+                <>
+                  <Loader2 size={18} className="spinner" />
+                  <span>Enviando...</span>
+                </>
+              ) : (
+                <>
+                  <Send size={18} />
+                  <span>Enviar Mensagem</span>
+                </>
+              )}
             </button>
           </form>
         </div>

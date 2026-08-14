@@ -12,9 +12,11 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        api: 'modern-compiler',
+        silenceDeprecations: ['import'],
         additionalData: `
-          @import "@/styles/variables";
-          @import "@/styles/mixins";
+          @use "@/styles/variables" as *;
+          @use "@/styles/mixins" as *;
         `,
       },
     },
