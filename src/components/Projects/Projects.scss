@@ -1,0 +1,127 @@
+@import '../../styles/global';
+
+.projects-section {
+  padding: 5rem 1.5rem;
+  background-color: var(--bg-color);
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+
+    .section-badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      background-color: var(--accent-bg);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--text-color);
+      letter-spacing: -0.5px;
+
+      @media (max-width: 640px) {
+        font-size: 1.75rem;
+      }
+    }
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .project-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-color);
+
+      .folder-icon {
+        color: var(--primary-color);
+      }
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+
+      .folder-icon {
+        color: var(--muted-text);
+        transition: color 0.3s ease;
+      }
+
+      .card-links {
+        display: flex;
+        gap: 1rem;
+
+        a {
+          color: var(--muted-text);
+          transition: color 0.2s ease, transform 0.2s ease;
+
+          &:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+          }
+        }
+      }
+    }
+
+    .card-body {
+      margin-bottom: 1.5rem;
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 0.75rem;
+      }
+
+      p {
+        font-size: 0.95rem;
+        color: var(--muted-text);
+        line-height: 1.6;
+      }
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+
+      .tag {
+        font-size: 0.8rem;
+        font-weight: 500;
+        padding: 0.25rem 0.65rem;
+        border-radius: var(--border-radius-sm);
+        background-color: var(--accent-bg);
+        color: var(--primary-color);
+      }
+    }
+  }
+}

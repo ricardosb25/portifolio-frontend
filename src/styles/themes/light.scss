@@ -1,6 +1,14 @@
 .light {
-  --bg-color: #ffffff;
-  --secundary-bg-color: #f0f0f0;
-  --text-color: #121212;
-  --primary-color: #291be4;
+  --bg-color: #f8fafc;
+  --secundary-bg-color: #ffffff;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --text-color: #0f172a;
+  --muted-text: #64748b;
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent-bg: #eff6ff;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
 }

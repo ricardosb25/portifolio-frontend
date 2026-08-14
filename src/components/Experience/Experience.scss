@@ -1,0 +1,119 @@
+@import '../../styles/global';
+
+.experience-section {
+  padding: 5rem 1.5rem;
+  background-color: var(--secundary-bg-color);
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+
+    .section-badge {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      background-color: var(--accent-bg);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--text-color);
+      letter-spacing: -0.5px;
+
+      @media (max-width: 640px) {
+        font-size: 1.75rem;
+      }
+    }
+  }
+
+  .experience-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+
+    @media (max-width: 868px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .experience-column {
+    .column-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+      color: var(--primary-color);
+
+      h3 {
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-color);
+      }
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      .timeline-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: var(--border-radius-md);
+        padding: 1.75rem;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        position: relative;
+
+        &:hover {
+          transform: translateY(-4px);
+          border-color: var(--primary-color);
+          box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+          margin-bottom: 0.5rem;
+
+          h4 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-color);
+          }
+
+          .company {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--primary-color);
+          }
+        }
+
+        .card-period {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 0.85rem;
+          color: var(--muted-text);
+          margin-bottom: 1rem;
+        }
+
+        p {
+          font-size: 0.95rem;
+          color: var(--muted-text);
+          line-height: 1.6;
+        }
+      }
+    }
+  }
+}
