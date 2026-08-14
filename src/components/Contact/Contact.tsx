@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Contact.scss';
-import { Mail, Send, MapPin, CheckCircle2 } from 'lucide-react';
+import { Mail, Send, CheckCircle2 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../SocialIcons/SocialIcons';
 
 export default function Contact() {

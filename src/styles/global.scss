@@ -3,8 +3,8 @@
 @import './themes/light';
 @import './themes/dark';
 
-html {
-  scroll-behavior: smooth;
+html, body {
+  scroll-behavior: smooth !important;
   scroll-padding-top: 80px;
 }
 

@@ -4,10 +4,19 @@ import Experience from '../../components/Experience/Experience';
 import Skills from '../../components/Skills/Skills';
 import Projects from '../../components/Projects/Projects';
 import Contact from '../../components/Contact/Contact';
+import ScrollToTop from '../../components/ScrollToTop/ScrollToTop';
 import { ArrowDown, Mail } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../../components/SocialIcons/SocialIcons';
 
 export default function Home() {
+  const handleSmoothScroll = (event: React.MouseEvent<HTMLAnchorElement>, targetSectionId: string) => {
+    event.preventDefault();
+    const targetElement = document.getElementById(targetSectionId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <main className="home">
       <section id="hero" className="hero-section">
@@ -21,10 +30,18 @@ export default function Home() {
           </p>
 
           <div className="hero-actions">
-            <a href="#projetos" className="primary-btn">
+            <a
+              href="#projetos"
+              className="primary-btn"
+              onClick={(event) => handleSmoothScroll(event, 'projetos')}
+            >
               Ver Projetos
             </a>
-            <a href="#contato" className="secondary-btn">
+            <a
+              href="#contato"
+              className="secondary-btn"
+              onClick={(event) => handleSmoothScroll(event, 'contato')}
+            >
               Falar Comigo
             </a>
           </div>
@@ -52,7 +69,12 @@ export default function Home() {
           </div>
         </div>
 
-        <a href="#sobre" className="scroll-indicator" aria-label="Rolar para a seção sobre">
+        <a
+          href="#sobre"
+          className="scroll-indicator"
+          aria-label="Rolar para a seção sobre"
+          onClick={(event) => handleSmoothScroll(event, 'sobre')}
+        >
           <ArrowDown size={20} />
         </a>
       </section>
@@ -62,6 +84,7 @@ export default function Home() {
       <Skills />
       <Projects />
       <Contact />
+      <ScrollToTop />
     </main>
   );
 }

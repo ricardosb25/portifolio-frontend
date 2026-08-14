@@ -38,13 +38,30 @@
     gap: 2rem;
 
     a {
+      position: relative;
       font-weight: 500;
       font-size: 0.95rem;
       color: var(--muted-text);
       transition: color 0.2s ease;
 
-      &:hover {
+      &:hover,
+      &.active {
         color: var(--primary-color);
+      }
+
+      &.active::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--primary-color);
+        border-radius: 2px;
+
+        @media (max-width: 768px) {
+          display: none;
+        }
       }
     }
 
