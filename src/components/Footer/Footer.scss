@@ -1,10 +1,11 @@
-@import '../styles/global';
+@import '../../styles/global';
 
 .footer {
   text-align: center;
   padding: 2rem 1rem;
   font-size: 0.9rem;
   background-color: var(--secundary-bg-color);
-  color: #6c757d;
+  color: var(--muted-text);
   transition: var(--transition);
+  border-top: 1px solid var(--card-border);
 }
