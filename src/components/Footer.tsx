@@ -1,9 +1,11 @@
 import './Footer.scss';
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="footer">
-      <p>&copy; 2025 Seu Nome. Todos os direitos reservados.</p>
+      <p>&copy; {currentYear} Ricardo Souza Bissaco. Todos os direitos reservados.</p>
     </footer>
   );
 }
